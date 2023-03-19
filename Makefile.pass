@@ -1,3 +1,11 @@
-all: pass/DumpPass.cpp
-	cd build-pass
-	make
+CC = clang
+GXX_STANDARD = 17 # 11, 14, 17, 20
+CXXFLAGS = -O2 -Wall -Wextra
+
+.PHONY: all log
+all: log
+	@/bin/bash -c "cd build-pass/;make"
+
+log:
+	@mkdir -p bin
+	@$(CC) pass/log.c -c -o bin/log.o $(CXXFLAGS)

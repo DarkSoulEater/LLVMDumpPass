@@ -13,16 +13,7 @@ namespace {
     static char ID;
     SkeletonPass() : FunctionPass(ID) {}
 
-    bool isFuncLogger(StringRef name) {
-      return name == "funcStartLogger";
-    }
-
     virtual bool runOnFunction(Function &F) {
-      outs() << F.getName() << "\n";
-      if (isFuncLogger(F.getName())) {
-        return false;
-      }
-
       //outs() << F.getName() << ":\n";
       //outs() << F;
 
@@ -32,10 +23,8 @@ namespace {
         //outs() << "    [DOT] " << (uint64_t)(&F) << " -> " << (uint64_t)user << "\n";
         //outs() << "    User:  " << (uint64_t)user;
         //user->print(llvm::outs(), true);
-        //outs() << "\n";
+        //outs() << "\n";//
       }
-
-      //outs() << "Instr Uses:\n";
 
       for (auto& B: F) {
         for (auto& I: B) {
@@ -78,6 +67,6 @@ namespace {
 }
 
 char SkeletonPass::ID = 0;
-static RegisterPass<SkeletonPass> X("sp", "Skeleton Pass",
+static RegisterPass<SkeletonPass> X("sppass", "Skeleton Pass",
                              false /* Only looks at CFG */,
-                             false /* Analysis Pass */);
+                             true /* Analysis Pass */);
