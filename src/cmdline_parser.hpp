@@ -1,0 +1,1 @@
+void ParseArgs(int argc, char *argv[]);

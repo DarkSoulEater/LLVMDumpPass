@@ -1,0 +1,3 @@
+all: pass/DumpPass.cpp
+	cd build-pass
+	make
